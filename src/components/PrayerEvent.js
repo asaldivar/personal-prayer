@@ -4,12 +4,12 @@ import {
   View,
   Text
 } from 'react-native'
-import { StackNavigator, TabNavigator } from 'react-navigation'
+import { TabNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/EvilIcons'
 
-export default class PrayerInfo extends Component {
+export default class PrayerEvent extends Component {
   static navigationOptions = {
-    tabBarLabel: 'Companies',
+    tabBarLabel: 'Selection',
     tabBarIcon: ({ tintColor }) => (
       <Icon
         name={'eye'}
@@ -21,11 +21,11 @@ export default class PrayerInfo extends Component {
 
   render() {
     return (
-    	<View style={styles.container}>
-	      <Text>
-					PrayerInfo
-	      </Text>
-	     </View>
+      <View style={styles.container}>
+        <Text>
+          PrayerEvent
+        </Text>
+      </View>
     )
   }
 }
