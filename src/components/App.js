@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
 import { View, StyleSheet } from 'react-native'
-import firebase from 'firebase'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import reducers from '../reducers/PrayerReducer'
+// import firebase from 'firebase'
 
 import Navigation from './Navigation'
 import Login from './Login'
+
+const store = createStore(reducers)
 
 export default class PersonalPrayer extends Component {
   state = {
@@ -11,22 +16,22 @@ export default class PersonalPrayer extends Component {
   }
 
   componentWillMount() {
-    firebase.initializeApp({
-      apiKey: "AIzaSyARhPO_VkoCgYh0JzRfiJhmzi-MjJJRMVU",
-      authDomain: "personalprayer-bf55d.firebaseapp.com",
-      databaseURL: "https://personalprayer-bf55d.firebaseio.com",
-      projectId: "personalprayer-bf55d",
-      storageBucket: "personalprayer-bf55d.appspot.com",
-      messagingSenderId: "61671107412"
-    })
+    // firebase.initializeApp({
+    //   apiKey: "AIzaSyARhPO_VkoCgYh0JzRfiJhmzi-MjJJRMVU",
+    //   authDomain: "personalprayer-bf55d.firebaseapp.com",
+    //   databaseURL: "https://personalprayer-bf55d.firebaseio.com",
+    //   projectId: "personalprayer-bf55d",
+    //   storageBucket: "personalprayer-bf55d.appspot.com",
+    //   messagingSenderId: "61671107412"
+    // })
 
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({ loggedIn: true })
-      } else {
-        this.setState({ loggedIn: false })
-      }
-    })
+    // firebase.auth().onAuthStateChanged((user) => {
+    //   if (user) {
+    //     this.setState({ loggedIn: true })
+    //   } else {
+    //     this.setState({ loggedIn: false })
+    //   }
+    // })
   }
 
   renderInitialView() {
@@ -40,9 +45,11 @@ export default class PersonalPrayer extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Navigation/>
-      </View>
+      <Provider store={store}>
+        <View style={styles.container}>
+          <Navigation/>
+        </View>
+      </Provider>
     )
   }
 }

@@ -6,6 +6,7 @@ import {
   Alert,
   StyleSheet
 } from 'react-native'
+import { connect } from 'react-redux'
 
 import { TabNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/EvilIcons'
@@ -16,36 +17,7 @@ import Accordion from 'react-native-collapsible/Accordion'
 
 import styles from '../styles/accordion'
 
-const MORNING_RECITAL = 'Morning Recital'
-
-const CONTENT = [
-  {
-    title: 'Morning Prayer',
-    content: MORNING_RECITAL,
-  },
-  {
-    title: 'Afternoon Prayer',
-    content: MORNING_RECITAL,
-  },
-  {
-    title: 'Evening Prayer',
-    content: MORNING_RECITAL,
-  },
-  {
-    title: 'Feast Day',
-    content: MORNING_RECITAL,
-  },
-  {
-    title: 'Novena',
-    content: MORNING_RECITAL,
-  },
-  {
-    title: 'All Saints',
-    content: MORNING_RECITAL,
-  }
-]
-
-export default class ExampleView extends Component {
+class ExampleView extends Component {
   static navigationOptions = {
     tabBarLabel: 'Selection',
     tabBarIcon: ({ tintColor }) => (
@@ -98,7 +70,7 @@ export default class ExampleView extends Component {
 
         <Accordion
           activeSection={this.state.activeSection}
-          sections={CONTENT}
+          sections={this.props.prayers}
           renderHeader={this.renderHeader}
           renderContent={this.renderContent}
           duration={400}
@@ -109,3 +81,9 @@ export default class ExampleView extends Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+  return { prayers: state.prayers };
+};
+
+export default connect(mapStateToProps)(ExampleView)
