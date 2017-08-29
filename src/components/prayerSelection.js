@@ -2,11 +2,14 @@ import React, { Component } from 'react'
 import {
   Text,
   View,
+  ScrollView,
   TouchableHighlight,
   Alert,
   StyleSheet
 } from 'react-native'
 import { connect } from 'react-redux'
+
+import { loadInitialPrayers } from '../actions'
 
 import { TabNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/EvilIcons'
@@ -50,6 +53,11 @@ class ExampleView extends Component {
     Alert.alert('wooo!')
   }
 
+  componentWillMount() {
+    this.props.loadInitialPrayers()
+    console.warn('prayers:', this.props.prayers)
+  }
+
   renderContent(section, i, isActive) {
     return (
       <Animatable.View duration={400}  style={[styles.content, isActive ? styles.active : styles.inactive]} transition="backgroundColor">
@@ -66,7 +74,7 @@ class ExampleView extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
 
         <Accordion
           activeSection={this.state.activeSection}
@@ -77,7 +85,7 @@ class ExampleView extends Component {
           onChange={this.setSection.bind(this)}
         />
 
-      </View>
+      </ScrollView>
     )
   }
 }
@@ -86,4 +94,4 @@ const mapStateToProps = state => {
   return { prayers: state.prayers };
 };
 
-export default connect(mapStateToProps)(ExampleView)
+export default connect(mapStateToProps, { loadInitialPrayers })(ExampleView)

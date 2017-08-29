@@ -31,6 +31,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case 'INITIAL_FETCH':
+      return {
+        ...state,
+        prayers: action.payload
+      }
     default:
       return state
   }
